@@ -1,0 +1,2 @@
+body{background: url("../images/bg_blue.jpg") no-repeat center center;width:100%;height:auto;padding:1px 0;}
+#main{width: 800px;height: 400px;margin: 100px auto;-webkit-tap-highlight-color: transparent;user-select: none;position: relative;background: transparent;}

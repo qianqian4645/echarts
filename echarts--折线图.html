@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/base.css"/>
+    <style>
+        #pieChart{width:600px;height:600px;margin:100px auto;}
+    </style>
+</head>
+<body>
+<div class="bd-ebeefb" id="pieChart">
+</div>
+<script src="js/echarts.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('pieChart'));
+    option = {
+        //title,legend 通用
+//        标题
+        title:{
+            id:"",
+            show:true,
+            text:"饼图的主标题",  //主标题
+            link:'http://www.baidu.com',  //主标题文本超链接
+            target:'self', // 指定窗口打开主标题超链接。 可选为：blank
+            textStyle:{
+                color:"red",  //主标题文字的颜色
+                fontStyle:"normal",  //主标题文字字体的风格 可选为: italic ,oblique
+                fontWeight:"bold", //主标题文字字体的粗细 可选为：normal , bolder ,lighter ,100 | 200 | 300 | 400...
+                fontFamily:"Arial", //主标题文字的字体系列 还可以是 'serif' , 'monospace', 'Arial', 'Courier New', 'Microsoft YaHei', ...
+                fontSize:18, //主标题文字的字体大小
+                align:"right", //文字水平对齐方式，默认自动 可选为 left ，right
+                verticalAlign:"bottom", //文字垂直对齐方式，默认自动 可选为  middle , bottom
+                lineHeight:60, //行高
+                width:100, //文字块的宽度。一般不用指定。注意，文字块的 width 和 height 指定的是内容高宽，不包含 padding。
+                height:1000,  //文字块的高度。
+                textBorderColor:"yellow",  //文字本身的描边颜色。
+                textBorderWidth:1, //文字本身的描边宽度
+                textShadowColor:"blue",
+                textShadowBlur:2, //文字本身的阴影长度。 默认为0
+                textShadowOffsetX:10, //文字本身的阴影 X 偏移。默认为0
+                textShadowOffsetY:10  //文字本身的阴影 Y 偏移。默认为0
+            },
+            subtext:"饼图的副标题", //副标题文本，支持使用 \n 换行。
+            sublink:'http://taobao.com',
+            subtarget:'self',  //指定窗口打开副标题超链接。 可选为：blank
+            subtextStyle:{
+                color:"#333"
+            }, // 属性同textStyle 中的属性的使用方法相同
+            padding:5,  //标题内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+            itemGap:30, //主副标题之间的间距。默认为 10
+            //zlevel:1, // 组件的所有图形的z值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。默认值为 2
+            left:'center', //grid 组件离容器左侧的距离。
+            top:10,  //grid 组件离容器上侧的距离。
+            //right:"auto", //grid 组件离容器右侧的距离。
+            //bottom:'auto', //grid 组件离容器下侧的距离。  一般是上下或者左右的中的单个配合使用
+            backgroundColor:'#ddd', //标题背景色，默认透明。
+            borderColor:'pink', //标题的边框颜色。支持的颜色格式同 backgroundColor。
+            borderWidth:2,   //标题的边框线宽。
+            borderRadius:5,  //标题的圆角半径，单位px，支持传入数组分别指定 4 个圆角半径。 如:
+            shadowBlur:10, //标题的图形阴影的模糊大小。
+            shadowColor:"#ffa51f",  //标题的圆角半径，单位px，支持传入数组分别指定 4 个圆角半径
+            shadowOffsetX:10,  //阴影水平方向上的偏移距离。
+            shadowOffsetY:10  //阴影垂直方向上的偏移距离。
+        },
+//        图例组件。
+        legend:{
+            type: 'scroll',
+            left: 20,
+            top: 20, //y:'center',x:'center' //与left,top,right,bottom 的功能类似
+            orient: 'vertical', //图例列表的布局朝向。 还可选vertical 垂直方向
+            align: 'left', //图例标记和文本的对齐。
+            width: 500, //图例组件的宽度。默认自适应。
+            height: 310, //图例组件的高度。默认自适应。
+            padding: 10, //图例内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+            itemGap: 20, //图例每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
+            itemWidth: 20, //图例标记的图形宽度。 默认为25
+            itemHeight: 14, //图例标记的图形高度。
+            symbolKeepAspect: true, //如果图标（可能来自系列的 symbol 或用户自定义的 legend.data.icon）是 path:// 的形式，是否在缩放时保持该图形的长宽比。
+            formatter: '',
+            selectedMode: true, //图例选择的模式，控制是否可以通过点击图例改变系列的显示状态
+            inactiveColor: '#000', //图例关闭时的颜色。
+            selected: {
+                '系列1': true,
+                '系列2': false
+            },
+            textStyle: {},//图例的公用文本样式。   属性同title中 textStyle 的一样
+            data: [{name: "第1名"},
+                {name: "第2名"},
+                {name: "第3民"},
+                {name: "第4名"},
+                {name: "第5名"},
+                {name: "第6名"},
+                {name: "第7名"},
+                {name: "第8名"},
+                {name: "第9名"},
+                {name: "第10名"},
+                {name: "第11名"},
+                {name: "第12名"},
+                {name: "第13名"},
+                {name: "第14名"},
+                {name: "第15名"},
+                {name: "第16名"},
+                {name: "第17名"},
+                {name: "第18名"},
+                {name: "第19名"},
+                {name: "第20名"},
+                {name: "第21名"},
+                {name: "第22名"},
+                {name: "第23名"},
+                {name: "第24名"},
+                {name: "第25名"},
+                {name: "第26名"},
+                {name: "第27名"},
+                {name: "第28名"},
+                {name: "第29名"},
+                {name: "第30名"},
+                {name: "第31名"},
+                {name: "第32名"},
+                {name: "第33名"},
+                {name: "第34名"},
+                {name: "第35名"},
+                {name: "第36名"},
+                {name: "第37名"},
+                {name: "第38名"},
+                {name: "第39名"},
+                {name: "第40名"},
+                {name: "第41名"},
+                {name: "第42名"},
+                {name: "第43名"},
+                {name: "第44名"},
+                {name: "第45名"},
+                {name: "第46名"},
+                {name: "第47名"},
+                {name: "第48名"},
+                {name: "第49名"},
+                {name: "第50名"},
+            ],
+            backgroundColor: "#f5f5f5",
+            borderColor: '#ebebeb',
+            borderWidth: 2,
+            borderRadius: 5,
+            shadowBlur: 10, //标题的图形阴影的模糊大小。
+            shadowColor: "#eee",  //标题的圆角半径，单位px，支持传入数组分别指定 4 个圆角半径
+            shadowOffsetX: 2,  //阴影水平方向上的偏移距离。
+            shadowOffsetY: 2,  //阴影垂直方向上的偏移距离。
+            scrollDataIndex: 10,//图例当前最左上显示项的 dataIndex。
+            pageButtonItemGap: 0, //图例控制块中，按钮和页信息之间的间隔。
+            pageButtonGap: 5,  //图例控制块和图例项之间的间隔。
+            pageButtonPosition: "start", //图例控制块的位置。可选值为：'start'：控制块在左或上。 'end'：按钮快在右或下。
+            pageFormatter: '{current}/{total}', //图例控制块中，页信息的显示格式。默认为 '{current}/{total}'，其中 {current} 是当前页号（从 1 开始计数），{total} 是总页数。
+            pageIconColor:'#ffc832', //翻页按钮的颜色。
+            pageIconInactiveColor:'#ccc', //翻页按钮不激活时（即翻页到头时）的颜色。
+            pageIconSize:[15,10],  //翻页按钮的大小。可以是数字，也可以是数组，如 [10, 3]，表示 [宽，高]。
+            pageTextStyle:{},   // 同textStyle中的属性相同，这里没有 align:"right", verticalAlign:"bottom", 这两个属性
+            animation:true, //图例翻页是否使用动画。
+            animationDurationUpdate:1000 //图例翻页时的动画时长。 默认为800
+        },
+//        网格
+        grid:{
+           show:true,
+            left:'center', //grid 组件离容器左侧的距离。
+            top:'center',  //grid 组件离容器上侧的距离。
+            //right:"auto", //grid 组件离容器右侧的距离。
+            //bottom:'auto', //grid 组件离容器下侧的距离。  一般是上下或者左右的中的单个配合使用
+            width:400,
+            height:400,
+            containLabel:true, //grid 区域是否包含坐标轴的刻度标签。
+            backgroundColor:'#f5f5f5', //网格背景色，默认透明。
+            borderColor:'#ebebeb',
+            borderWidth:1,
+            shadowBlur: 10, //标题的图形阴影的模糊大小。
+            shadowColor: "#eee",  //标题的圆角半径，单位px，支持传入数组分别指定 4 个圆角半径
+            shadowOffsetX: 2,  //阴影水平方向上的偏移距离。
+            shadowOffsetY: 2,  //阴影垂直方向上的偏移距离。
+            tooltip: {      //提示框组件
+
+            }
+
+            },
+        //xAxis,yAxis 属性相同，一个是X轴，一个是Y轴
+        xAxis:{  //直角坐标系 grid 中的 x 轴，一般情况下单个 grid 组件最多只能放上下两个 x 轴，多于两个 x 轴需要通过配置 offset 属性防止同个位置多个 x 轴的重叠。
+            show:true,
+            gridIndex:0,  //x 轴所在的 grid 的索引，默认位于第一个 grid。
+            position:'bottom', //x 轴的位置 可选 bottom  默认 grid 中的第一个 x 轴在 grid 的下方（'bottom'），第二个 x 轴视第一个 x 轴的位置放在另一侧。
+            offset:0, //X 轴相对于默认位置的偏移，在相同的 position 上有多个 X 轴的时候有用。
+            type:'value', //'value' 数值轴，适用于连续数据; 'category' 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据;'time' 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度;'log' 对数轴。适用于对数数据。
+            name:'x轴', //坐标轴名称
+            nameLocation:'end', //坐标轴名称显示位置。 可选 'start'，'middle' 或者 'center' ，'end'
+            nameTextStyle:{},  //与title中textStyle的属性类似
+            nameGap:15,   //坐标轴名称与轴线之间的距离。
+            nameRotate:0,  //坐标轴名字旋转，角度值。
+            inverse:false, //是否是反向坐标轴
+            boundaryGap:true, //坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
+            min:'0', //坐标轴刻度最小值。
+            max:'50', //坐标轴刻度最大值。
+            scale:false, //只在数值轴中（type: 'value'）有效。   //在设置 min 和 max 之后该配置项无效。
+            splitNumber:5, //坐标轴的分割段数，需要注意的是这个分割段数只是个预估值，最后实际显示的段数会在这个基础上根据分割后坐标轴刻度显示的易读程度作调整。
+            minInterval: 10,// 自动计算的坐标轴最小间隔大小。
+            maxInterval:20, //自动计算的坐标轴最大间隔大小。
+            interval:10, //强制设置坐标轴分割间隔。
+            triggerEvent:false  //坐标轴的标签是否响应和触发鼠标事件，默认不响应。
+        },
+        yAxis:{  //直角坐标系 grid 中的 x 轴，一般情况下单个 grid 组件最多只能放上下两个 x 轴，多于两个 x 轴需要通过配置 offset 属性防止同个位置多个 x 轴的重叠。
+            show:true,
+            gridIndex:0,  //x 轴所在的 grid 的索引，默认位于第一个 grid。
+            position:'bottom', //x 轴的位置 可选 bottom  默认 grid 中的第一个 x 轴在 grid 的下方（'bottom'），第二个 x 轴视第一个 x 轴的位置放在另一侧。
+            offset:0, //X 轴相对于默认位置的偏移，在相同的 position 上有多个 X 轴的时候有用。
+            type:'value', //'value' 数值轴，适用于连续数据; 'category' 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据;'time' 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度;'log' 对数轴。适用于对数数据。
+            name:'y轴', //坐标轴名称
+            nameLocation:'end', //坐标轴名称显示位置。 可选 'start'，'middle' 或者 'center' ，'end'
+            nameTextStyle:{},  //与title中textStyle的属性类似
+            nameGap:15,   //坐标轴名称与轴线之间的距离。
+            nameRotate:0,  //坐标轴名字旋转，角度值。
+            inverse:false, //是否是反向坐标轴
+
+        },
+        tooltip: {
+            trigger: 'item',
+
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'line',
+                color:["#ff0000","#ff9c32","#ffc832","#fff832","#e0ff32","#c8ff32","#7fff32","#32ff7a","#32ffe4","#32e9ff","#32c3ff","#3292ff","#323cff","#8432ff","#af32ff","#ee10e1"],
+                data:[
+                    {value:50, name:'第1名'},
+                    {value:49, name:'第2名'},
+                    {value:48, name:'第3名'},
+                    {value:47, name:'第4名'},
+                    {value:46, name:'第5名'},
+                    {value:45, name:'第6名'},
+                    {value:44, name:'第7名'},
+                    {value:43, name:'第8名'},
+                    {value:42, name:'第9名'},
+                    {value:41, name:'第10名'},
+                    {value:40, name:'第11名'},
+                    {value:39, name:'第12名'},
+                    {value:38, name:'第13名'},
+                    {value:37, name:'第14名'},
+                    {value:36, name:'第15名'},
+                    {value:35, name:'第16名'},
+                    {value:34, name:'第17名'},
+                    {value:33, name:'第18名'},
+                    {value:32, name:'第19名'},
+                    {value:31, name:'第20名'},
+                    {value:30, name:'第21名'},
+                    {value:29, name:'第22名'},
+                    {value:28, name:'第23名'},
+                    {value:27, name:'第24名'},
+                    {value:26, name:'第25名'},
+                    {value:25, name:'第26名'},
+                    {value:24, name:'第27名'},
+                    {value:23, name:'第28名'},
+                    {value:22, name:'第29名'},
+                    {value:21, name:'第30名'},
+                    {value:20, name:'第31名'},
+                    {value:19, name:'第32名'},
+                    {value:18, name:'第33名'},
+                    {value:17, name:'第34名'},
+                    {value:16, name:'第35名'},
+                    {value:15, name:'第36名'},
+                    {value:14, name:'第37名'},
+                    {value:13, name:'第38名'},
+                    {value:12, name:'第39名'},
+                    {value:11, name:'第40名'},
+                    {value:10, name:'第41名'},
+                    {value:9, name:'第42名'},
+                    {value:8, name:'第43名'},
+                    {value:7, name:'第44名'},
+                    {value:6, name:'第45名'},
+                    {value:5, name:'第46名'},
+                    {value:4, name:'第47名'},
+                    {value:3, name:'第48名'},
+                    {value:2, name:'第49名'},
+                    {value:1, name:'第50名'}
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+    // 垂直安放位置，默认为全图顶端，可选为：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
+</script>
+<script>
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.extension-main{width:100%;background-color: #eceffc;padding:10px;box-sizing: border-box;}
+.statistical-data{padding:20px 30px 30px;box-sizing:border-box;background-color: #fff;border-radius:4px;box-shadow: 0 2px 4px 0 rgba(232, 232, 232, 0.5);}
+.statistical-select{border:1px solid #dfe5fe;width:195px;height:30px;text-align-last: center;}
+.statistical-select2,.statistical-input{border:1px solid #dfe5fe;width:127px;height:30px;text-align-last: center;text-align: center;}
+.statistical-query{display: inline-block;width: 70px;height: 30px;background-color: #0267ff;border-radius: 3px;text-align:center;line-height:30px;color:#fff;margin-left:35px;font-size:16px;}
+.statistical-export{display: inline-block;width:104px;height:30px;background-color: #ff5402;border-radius: 3px;text-align:center;line-height:30px;color:#fff;margin-left:35px;font-size:15px;}
+.extension-table{width:100%;border:1px solid #ebeefb;}
+.extension-table th{height:40px;text-align:center;background-color:#f9faff;border:1px solid #ebeefb;color:#535f6b;font-weight: bold;}
+.extension-table td{height:40px;border:1px solid #ebeefb;text-align: center;}
+.data-trend-flex{display: flex;}
+.data-trend-container{flex: 1;}
+.data-trend-container:last-child{margin-left:20px;}
+.data-trend-tag,.data-trend-pie{height:47px;box-sizing: border-box;}
+.data-trend-tag span{display: inline-block;padding:3px 9px;border-radius:2px;border:1px solid #dfe5fe;margin-right:10px;}
+.data-trend-tag span.active{background-color: #ff5402;border:1px solid #ff5402;color:#fff;}
+.data-trend-month{width:120px;height: 19px;background-color: #ffffff;border-radius: 2px;border: solid 1px #dfe5fe;text-align: center;font-size: 12px;}
+#lineChart,#pieChart{width:100%;height:346px;}
+.extension-page-show li{float:left;padding:5px 20px;border:1px solid #ebeefb;border-right:none;color:#ff5402;}
+.extension-page-show li:last-child{border-right:1px solid #ebeefb;}
+.extension-page-show li:first-child{color:#999;}
+.extension-page-show li.active:not(:first-child){background-color: #ff5402;color:#fff;border:1px solid #ff5402;}
+.extension-paging li{float:left;padding:5px 20px;border:1px solid #ebeefb;border-right:none;color:#ff5402;}
+.extension-paging li:last-child{border-right:1px solid #ebeefb;}
+.extension-paging li.active{background-color: #ff5402;color:#fff;border:1px solid #ff5402;}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <link rel="stylesheet" href="../base.css"/>
+    <link rel="stylesheet" href="css/echarts1.css"/>
+    <!-- 引入 echarts.js -->
+    <script src="../echarts.js"></script>
+</head>
+<body>
+<img src="" alt=""/>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var posList = [];
+    myChart.configParameters = {};
+    myChart.config = {};
+    var labelOption = {};
+    var item=[
+        {
+            "CPName": "车辅",
+            "CPcode": "Y09",
+            "DY_XL": 22327.528,
+            "DY_JXJDXL": 0.0,
+            "DY_JD": 0.0,
+            "DY_CQJHL": 22327.528,
+            "TQ_XL": 16483.016,
+            "TB": 0.3545778272617098715429263674
+        },
+        {
+            "CPName": "工业油",
+            "CPcode": "Y02",
+            "DY_XL": 22528.347,
+            "DY_JXJDXL": 0.0,
+            "DY_JD": 0.0,
+            "DY_CQJHL": 22528.347,
+            "TQ_XL": 21680.370,
+            "TB": 0.0391126627451468771058796506
+        },
+        {
+            "CPName": "车用油",
+            "CPcode": "Y01",
+            "DY_XL": 15803.440,
+            "DY_JXJDXL": 0.0,
+            "DY_JD": 0.0,
+            "DY_CQJHL": 15803.440,
+            "TQ_XL": 14525.544,
+            "TB": 0.0879757756404854785473094846
+        }
+            ];
+    var CPName = [] ;   //		产品名称
+    var CPcode = [];    //			产品code
+    var DY_XL = []  ;   //			当月销量
+    var DY_JXJDXL = []; //			当月计划进度销量
+    var DY_JD = [] ;   //			当月进度
+    var DY_CQJHL = []; //			当月超欠计划量
+    var DY_CQJHL_ = []; //			当月超欠计划量
+    var DYCQJHL = []; //			当月超欠计划量
+    var TQ_XL = [];    //			同期销量
+    var TB = []  ;  //			同比
+    var MAX = [];
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        title:{
+           color:'red'
+        },
+        legend: {
+            data: [{
+               name: '当月累计量'
+            },{
+               name: '计划进度量'
+            },{
+                name: '进度'
+            },{
+                name: '同比',
+                icon:'image://images/obj3.png'
+            },{
+                name: '超计划量'
+           },{
+                name: '欠计划量'
+            },{
+                name: '同期量'
+            }],
+            textStyle:{                 //----图例内容样式
+                color:'#5e91e4'          //---所有图例的字体颜色
+            }
+        },
+        calculable: true,
+        xAxis:      //----X轴
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: ['车辅', '工业油', '车用油'],
+                nameTextStyle:{             //---坐标轴名称样式
+                    color:"#fff",
+                    padding:[5,0,0,-5] //---坐标轴名称相对位置
+                },
+                nameGap:15,
+                axisLine:{                  //---坐标轴 轴线
+                    show:true,                  //---是否显示
+                    //------------------- 线 -------------------------
+                    lineStyle:{
+                        color:'black',
+                        width:1,
+                        type:'solid'
+                    }
+                },
+                axisLabel:{                 //---坐标轴 标签
+                    show:true,                  //---是否显示
+                    inside:false,               //---是否朝内
+                    rotate:0,                   //---旋转角度
+                    margin: 15,                  //---刻度标签与轴线之间的距离
+                    color:'#5e91e4'              //---默认取轴线的颜色
+                }
+            },
+
+        yAxis: [  //--------Y轴
+            {
+                name: '吨',
+                nameTextStyle: {             //---坐标轴名称样式
+                    color: "#5e91e4"
+                },
+                type: 'value',
+                axisLine: {                  //---坐标轴 轴线
+                    show: true,                  //---是否显示
+                    lineStyle: {
+                        color: 'black',
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisTick: {                  //---坐标轴 刻度
+                    show: true,                  //---是否显示
+                    inside: true,                //---是否朝内
+                    length: 3,                    //---长度
+                    lineStyle: {
+                        color: 'black',          //---默认取轴线的颜色
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                axisLabel: {                 //---坐标轴 标签
+                    show: true,                  //---是否显示
+                    inside: false,               //---是否朝内
+                    rotate: 0,                   //---旋转角度
+                    margin: 8,                  //---刻度标签与轴线之间的距离
+                    color: '#5e91e4'            //---默认取轴线的颜色
+                },
+                splitLine: {                 //---grid 区域中的分隔线
+                    show: true,                 //---是否显示，'category'类目轴不显示，此时我的X轴为类目轴，splitLine属性是无意义的
+                    lineStyle: {
+                        color:'black',
+                        width:1,
+                        type:'solid'
+                    }
+                }
+            },
+            {
+                name: '%',
+                nameTextStyle: {             //---坐标轴名称样式
+                    color: "#4bb7ff",
+                    fontWeight:'normal'
+                },
+                type: 'value',
+                axisLine: {                  //---坐标轴 轴线
+                    show: true,                  //---是否显示
+                    lineStyle: {
+                        color: 'black',
+                        width: 1
+                    }
+                },
+                axisTick: {                  //---坐标轴 刻度
+                    show: false,                  //---是否显示
+                },
+                axisLabel: {                 //---坐标轴 标签
+                    textStyle:{
+                        color:'#6AA2F9'
+                    }            //---默认取轴线的颜色
+                },
+                splitLine: {                 //---grid 区域中的分隔线
+                    show: false,                 //---是否显示，'category'类目轴不显示，此时我的X轴为类目轴，splitLine属性是无意义的
+                    lineStyle: {
+                        color:'black',
+                        width:1
+                    }
+                }
+            }
+
+        ],
+
+        series: [
+            {
+                name: '超计划量',
+                type: 'bar',
+                stack:'B',
+                legendHoverLink: true,
+                data: [22328, 22328, 16483],
+                itemStyle: {                 //---图形形状
+                    color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(236,65,56,1)'},
+                                {offset: 1, color: 'rgba(236,65,56,0.1)'}
+                            ]
+                    ),
+                    barBorderRadius: [10, 10, 0, 0]
+                },
+                barWidth: '15' //柱形图的宽度
+            },{
+                name: '进度',
+                type: 'line',
+                data: '[0.2,0.1,0.2]',
+                yAxisIndex:1,
+                itemStyle: {                 //---图形形状
+                    color:"#7A5694",
+                    barBorderRadius:  [10, 10, 0, 0]
+                },
+                barWidth: '15'  //柱形图的宽度
+            },{
+                name: '同比',
+                type: 'bar',
+                barWidth: '0',
+                data:''//柱形图的宽度
+            },{
+                name: '当月累计量',
+                type: 'bar',
+                barGap: 0,
+                data: [22538, 22528, 21680],
+                itemStyle: {                 //---图形形状
+                    color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(123,15,250,1)'},
+                                {offset: 1, color: 'rgba(123,15,250,0.1)'}
+                            ]
+                    ),
+                    barBorderRadius:  [10, 10, 0, 0]  //------弧度的大小
+                },
+                barWidth: '15'
+            },
+            {
+                name: '同期量',
+                type: 'bar',
+                data: [15803, 15803, 14526],
+                itemStyle: {                 //---图形形状
+                    color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(248,139,4,1)'},
+                                {offset: 1, color: 'rgba(248,139,4,0.1)'}
+                            ]
+                    ),
+                    barBorderRadius:  [10, 10, 0, 0]
+                },
+                barWidth: '15'
+            },
+            {
+                name: '计划进度量',
+                type: 'bar',
+                data:'',
+                itemStyle: {                 //---图形形状
+                    color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(1,150,250,1)'},
+                                {offset: 1, color: 'rgba(1,150,250,0.1)'}
+                            ]
+                    ),
+                    barBorderRadius:  [10, 10, 0, 0]
+                },
+                markPoint: {
+                    symbolSize: 30,
+                    symbolOffset: ['52%', '-40%'],
+                    data: '',
+                    silent: false,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside',
+                            formatter: function (params) {
+                                return params.name;
+                            },
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 20
+                            }
+                        }
+                    }
+                },
+                barWidth: '15'   //柱形图的宽度
+            },
+            {
+                name: '欠计划量',
+                type: 'bar',
+                barGap: 0,
+                data: '',
+                itemStyle: {                 //---图形形状
+                    color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: 'rgba(75,172,79,1)'},
+                                {offset: 1, color: 'rgba(75,172,79,0.1)'}
+                            ]
+                    ),
+                    barBorderRadius: [10, 10, 0, 0]  //------弧度的大小
+                },
+                barWidth: '15'
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>
